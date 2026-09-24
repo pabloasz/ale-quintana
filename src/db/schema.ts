@@ -27,7 +27,6 @@ export const raffles = pgTable("raffles", {
   id: uuid("id").primaryKey().defaultRandom(),
   title: text("title").notNull(),
   prizeDescription: text("prize_description").notNull(),
-  prizeValue: integer("prize_value"),
   pricePerNumber: integer("price_per_number").notNull(),
   lotteryName: text("lottery_name").notNull(),
   prizeImageDataUrl: text("prize_image_data_url"),

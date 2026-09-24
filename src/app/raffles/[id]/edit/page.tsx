@@ -39,7 +39,6 @@ export default async function EditRafflePage({
         defaultValues={{
           title: raffle.title,
           prizeDescription: raffle.prizeDescription,
-          prizeValue: raffle.prizeValue,
           pricePerNumber: raffle.pricePerNumber,
           lotteryName: raffle.lotteryName,
           prizeImageDataUrl: raffle.prizeImageDataUrl,

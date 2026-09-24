@@ -25,7 +25,6 @@ export function RaffleForm({
   defaultValues?: {
     title: string;
     prizeDescription: string;
-    prizeValue?: number | null;
     pricePerNumber: number;
     lotteryName: string;
     prizeImageDataUrl?: string | null;
@@ -67,33 +66,17 @@ export function RaffleForm({
         defaultValue={defaultValues?.prizeImageDataUrl}
       />
 
-      <div className="grid grid-cols-2 gap-4">
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="prizeValue">Valor estimado (opcional)</Label>
-          <Input
-            id="prizeValue"
-            name="prizeValue"
-            type="number"
-            min={1}
-            placeholder="1000000"
-            defaultValue={defaultValues?.prizeValue ?? undefined}
-          />
-          <p className="text-xs text-muted-foreground">
-            Solo si querés aclararlo aparte del premio (ej. la prenda vale...).
-          </p>
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="pricePerNumber">Valor del puesto (COP)</Label>
-          <Input
-            id="pricePerNumber"
-            name="pricePerNumber"
-            type="number"
-            min={1}
-            required
-            placeholder="20000"
-            defaultValue={defaultValues?.pricePerNumber}
-          />
-        </div>
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="pricePerNumber">Valor del puesto (COP)</Label>
+        <Input
+          id="pricePerNumber"
+          name="pricePerNumber"
+          type="number"
+          min={1}
+          required
+          placeholder="20000"
+          defaultValue={defaultValues?.pricePerNumber}
+        />
       </div>
 
       {mode === "create" ? (
