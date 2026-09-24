@@ -8,7 +8,7 @@ Pensada para un solo usuario administrador (no hay vista pública ni auto-reserv
 
 - **Next.js (App Router) + TypeScript** — frontend y backend en una sola app.
 - **Postgres** vía **Drizzle ORM** (`drizzle-orm/postgres-js`, funciona igual en local y contra [Neon](https://neon.com) en producción).
-- **Auth.js (NextAuth v5)** con proveedor Credentials (un único usuario admin).
+- **Auth.js (NextAuth v5)** con proveedor Credentials (un único código de acceso, sin usuario/correo).
 - **Tailwind CSS**, componentes propios estilo shadcn/ui (sin CLI, copiados a `src/components/ui`) y **Vaul** para el panel deslizable de edición de números.
 - **`next/og` (`ImageResponse`)** para generar el tablero como PNG en `/api/raffles/[id]/board`.
 
@@ -36,13 +36,13 @@ Pensada para un solo usuario administrador (no hay vista pública ni auto-reserv
    npm run db:migrate
    ```
 
-4. Crear el usuario administrador:
+4. Configurar el código de acceso (el que va a usar la administradora para entrar):
 
    ```bash
-   SEED_ADMIN_EMAIL=tu@correo.com SEED_ADMIN_PASSWORD=una-clave-segura npm run db:seed
+   SEED_ADMIN_CODE=el-codigo-que-ella-elija npm run db:seed
    ```
 
-   Este script se puede volver a correr en cualquier momento (con otra contraseña) para resetear la clave de acceso.
+   Este script se puede volver a correr en cualquier momento (con otro código) para resetear el acceso.
 
 5. Levantar el servidor de desarrollo:
 
@@ -50,7 +50,7 @@ Pensada para un solo usuario administrador (no hay vista pública ni auto-reserv
    npm run dev
    ```
 
-   Abrir [http://localhost:3000](http://localhost:3000) e iniciar sesión con el correo/contraseña del paso 4.
+   Abrir [http://localhost:3000](http://localhost:3000) e iniciar sesión con el código del paso 4.
 
 ## Scripts útiles
 
@@ -62,18 +62,18 @@ Pensada para un solo usuario administrador (no hay vista pública ni auto-reserv
 | `npm run db:generate` | Genera una migración nueva a partir de `src/db/schema.ts` |
 | `npm run db:migrate` | Aplica las migraciones pendientes |
 | `npm run db:studio` | Abre [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview) para explorar la base de datos |
-| `npm run db:seed` | Crea o resetea el usuario administrador |
+| `npm run db:seed` | Crea o resetea el código de acceso |
 
 ## Deploy (Vercel + Neon)
 
 1. Crear un proyecto en [Neon](https://neon.com) (capa gratis) y copiar la connection string **pooled** (con `-pooler` en el host).
 2. Crear un proyecto en [Vercel](https://vercel.com) apuntando a este repo.
 3. Configurar las variables de entorno en Vercel: `DATABASE_URL` (la de Neon) y `AUTH_SECRET`.
-4. Correr `npm run db:migrate` y `npm run db:seed` apuntando a la base de Neon (con `DATABASE_URL` de producción en el entorno local, o desde la shell de Vercel) para crear las tablas y el usuario admin.
+4. Correr `npm run db:migrate` y `npm run db:seed` apuntando a la base de Neon (con `DATABASE_URL` de producción en el entorno local, o desde la shell de Vercel) para crear las tablas y el código de acceso.
 5. Deploy. La app queda disponible en el dominio de Vercel (se puede agregar un dominio propio después).
 
 ### Notas
 
-- Si olvidás la contraseña del admin, se resetea corriendo de nuevo `npm run db:seed` con `DATABASE_URL` apuntando a producción — no hay flujo de "olvidé mi contraseña" por correo (no hace falta para un solo usuario).
+- Si se olvida el código de acceso, se resetea corriendo de nuevo `npm run db:seed` con `DATABASE_URL` apuntando a producción — no hay flujo de recuperación automático (no hace falta para un solo usuario).
 - La cantidad de números de una rifa (`grid_size`, 100 por defecto = "00" a "99") no se puede cambiar una vez creada la rifa.
 - El endpoint que genera la imagen del tablero (`/api/raffles/[id]/board`) requiere sesión iniciada, igual que el resto de la app — lo que se comparte por WhatsApp/Instagram es el archivo de imagen descargado, no un link.

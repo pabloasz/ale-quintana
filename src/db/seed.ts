@@ -6,13 +6,12 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import { users } from "./schema";
 
 async function main() {
-  const email = process.env.SEED_ADMIN_EMAIL;
-  const password = process.env.SEED_ADMIN_PASSWORD;
+  const code = process.env.SEED_ADMIN_CODE;
 
-  if (!email || !password) {
+  if (!code) {
     console.error(
-      "Definí SEED_ADMIN_EMAIL y SEED_ADMIN_PASSWORD antes de correr este script.\n" +
-        "Ejemplo: SEED_ADMIN_EMAIL=ale@ejemplo.com SEED_ADMIN_PASSWORD=algo-seguro npm run db:seed",
+      "Definí SEED_ADMIN_CODE antes de correr este script.\n" +
+        "Ejemplo: SEED_ADMIN_CODE=el-codigo-que-ella-elija npm run db:seed",
     );
     process.exit(1);
   }
@@ -24,17 +23,15 @@ async function main() {
   const client = postgres(process.env.DATABASE_URL, { max: 1 });
   const db = drizzle(client);
 
-  const passwordHash = await bcrypt.hash(password, 12);
+  const codeHash = await bcrypt.hash(code, 12);
 
-  await db
-    .insert(users)
-    .values({ email, passwordHash })
-    .onConflictDoUpdate({
-      target: users.email,
-      set: { passwordHash },
-    });
+  // Solo existe un usuario admin: se reemplaza cualquier código anterior.
+  await db.transaction(async (tx) => {
+    await tx.delete(users);
+    await tx.insert(users).values({ codeHash });
+  });
 
-  console.log(`Usuario admin listo: ${email}`);
+  console.log("Código de acceso configurado.");
   await client.end();
 }
 

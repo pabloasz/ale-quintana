@@ -12,14 +12,13 @@ export async function loginAction(
 ): Promise<LoginState> {
   try {
     await signIn("credentials", {
-      email: formData.get("email"),
-      password: formData.get("password"),
+      code: formData.get("code"),
       redirectTo: "/raffles",
     });
     return { error: null };
   } catch (error) {
     if (error instanceof AuthError) {
-      return { error: "Correo o contraseña incorrectos." };
+      return { error: "Código incorrecto." };
     }
     throw error;
   }
