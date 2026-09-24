@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #faf7f0;
+  --foreground: #241c10;
+  --card: #ffffff;
+  --border: #e7ddc8;
+  --muted: #f1ead9;
+  --muted-foreground: #7a6f56;
+
+  --gold: #b8912f;
+  --gold-dark: #8a6a1e;
+  --gold-light: #f3e3b8;
+
+  --status-available: #e7e2d6;
+  --status-available-foreground: #5c5646;
+  --status-reserved: #f6d98a;
+  --status-reserved-foreground: #6b4e05;
+  --status-paid: #bfe3c6;
+  --status-paid-foreground: #1f5c30;
+
+  --destructive: #b3402f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-gold: var(--gold);
+  --color-gold-dark: var(--gold-dark);
+  --color-gold-light: var(--gold-light);
+
+  --color-status-available: var(--status-available);
+  --color-status-available-foreground: var(--status-available-foreground);
+  --color-status-reserved: var(--status-reserved);
+  --color-status-reserved-foreground: var(--status-reserved-foreground);
+  --color-status-paid: var(--status-paid);
+  --color-status-paid-foreground: var(--status-paid-foreground);
+
+  --color-destructive: var(--destructive);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
