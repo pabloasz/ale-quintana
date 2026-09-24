@@ -1,7 +1,9 @@
+import { Settings } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { auth } from "@/auth";
+import { Button } from "@/components/ui/button";
 
 import { LogoutButton } from "./logout-button";
 
@@ -23,7 +25,14 @@ export default async function RafflesLayout({
             </span>
             <span className="text-sm font-medium">Sorteos Oro 18k</span>
           </Link>
-          <LogoutButton />
+          <div className="flex items-center gap-1">
+            <Button asChild variant="ghost" size="icon">
+              <Link href="/raffles/ajustes" aria-label="Ajustes">
+                <Settings />
+              </Link>
+            </Button>
+            <LogoutButton />
+          </div>
         </div>
       </header>
       <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-6">
