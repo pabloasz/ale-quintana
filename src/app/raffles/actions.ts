@@ -28,7 +28,8 @@ export async function createRaffleAction(
     return { error: parsed.error.issues[0]?.message ?? "Datos inválidos" };
   }
 
-  const { gridSize, drawDate, prizeImageDataUrl, ...rest } = parsed.data;
+  const { gridSize, drawDate, prizeImageDataUrl, prizeValue, ...rest } =
+    parsed.data;
 
   const [raffle] = await db
     .insert(raffles)
@@ -37,6 +38,7 @@ export async function createRaffleAction(
       gridSize,
       drawDate: drawDate ? new Date(drawDate) : undefined,
       prizeImageDataUrl: prizeImageDataUrl || null,
+      prizeValue: prizeValue ?? null,
     })
     .returning({ id: raffles.id });
 
@@ -65,7 +67,7 @@ export async function updateRaffleAction(
     return { error: parsed.error.issues[0]?.message ?? "Datos inválidos" };
   }
 
-  const { drawDate, prizeImageDataUrl, ...rest } = parsed.data;
+  const { drawDate, prizeImageDataUrl, prizeValue, ...rest } = parsed.data;
 
   await db
     .update(raffles)
@@ -73,6 +75,7 @@ export async function updateRaffleAction(
       ...rest,
       drawDate: drawDate ? new Date(drawDate) : null,
       prizeImageDataUrl: prizeImageDataUrl || null,
+      prizeValue: prizeValue ?? null,
       updatedAt: new Date(),
     })
     .where(eq(raffles.id, raffleId));

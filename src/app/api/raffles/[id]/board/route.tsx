@@ -143,21 +143,27 @@ export async function GET(
               marginTop: 24,
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                background: "rgba(255,255,255,0.6)",
-                borderRadius: 16,
-                padding: "16px 28px",
-              }}
-            >
-              <span style={{ fontSize: 20, color: "#6b4e05" }}>Premio</span>
-              <span style={{ fontSize: 34, fontWeight: 800, color: "#241c10" }}>
-                {formatCOP(raffle.prizeValue)}
-              </span>
-            </div>
+            {raffle.prizeValue ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  background: "rgba(255,255,255,0.6)",
+                  borderRadius: 16,
+                  padding: "16px 28px",
+                }}
+              >
+                <span style={{ fontSize: 20, color: "#6b4e05" }}>
+                  Valor estimado
+                </span>
+                <span
+                  style={{ fontSize: 34, fontWeight: 800, color: "#241c10" }}
+                >
+                  {formatCOP(raffle.prizeValue)}
+                </span>
+              </div>
+            ) : null}
             <div
               style={{
                 display: "flex",

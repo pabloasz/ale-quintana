@@ -15,7 +15,6 @@ async function getRafflesWithStats() {
       id: raffles.id,
       title: raffles.title,
       prizeDescription: raffles.prizeDescription,
-      prizeValue: raffles.prizeValue,
       pricePerNumber: raffles.pricePerNumber,
       status: raffles.status,
       createdAt: raffles.createdAt,
@@ -102,7 +101,7 @@ function RaffleList({
                 {Number(raffle.sold)}/{raffle.gridSize} números vendidos
               </span>
               <span className="font-medium text-gold-dark">
-                Premio {formatCOP(raffle.prizeValue)}
+                Puesto {formatCOP(raffle.pricePerNumber)}
               </span>
             </CardContent>
           </Card>

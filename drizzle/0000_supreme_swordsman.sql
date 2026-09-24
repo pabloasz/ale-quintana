@@ -16,7 +16,7 @@ CREATE TABLE "raffles" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"title" text NOT NULL,
 	"prize_description" text NOT NULL,
-	"prize_value" integer NOT NULL,
+	"prize_value" integer,
 	"price_per_number" integer NOT NULL,
 	"lottery_name" text NOT NULL,
 	"prize_image_data_url" text,

@@ -25,7 +25,7 @@ export function RaffleForm({
   defaultValues?: {
     title: string;
     prizeDescription: string;
-    prizeValue: number;
+    prizeValue?: number | null;
     pricePerNumber: number;
     lotteryName: string;
     prizeImageDataUrl?: string | null;
@@ -54,9 +54,12 @@ export function RaffleForm({
           id="prizeDescription"
           name="prizeDescription"
           required
-          placeholder="Cadena de oro 18k"
+          placeholder="Cadena de oro 18k / iPhone 15 / $1.000.000 en efectivo"
           defaultValue={defaultValues?.prizeDescription}
         />
+        <p className="text-xs text-muted-foreground">
+          Puede ser plata, una prenda, un celular... lo que ella elija.
+        </p>
       </div>
 
       <ImageInput
@@ -66,16 +69,18 @@ export function RaffleForm({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5">
-          <Label htmlFor="prizeValue">Valor del premio (COP)</Label>
+          <Label htmlFor="prizeValue">Valor estimado (opcional)</Label>
           <Input
             id="prizeValue"
             name="prizeValue"
             type="number"
             min={1}
-            required
             placeholder="1000000"
-            defaultValue={defaultValues?.prizeValue}
+            defaultValue={defaultValues?.prizeValue ?? undefined}
           />
+          <p className="text-xs text-muted-foreground">
+            Solo si querés aclararlo aparte del premio (ej. la prenda vale...).
+          </p>
         </div>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="pricePerNumber">Valor del puesto (COP)</Label>

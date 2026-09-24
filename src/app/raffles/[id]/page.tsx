@@ -88,10 +88,9 @@ export default async function RaffleDetailPage({
       ) : null}
 
       <div className="grid grid-cols-2 gap-3">
-        <SummaryCard
-          label="Premio"
-          value={formatCOP(raffle.prizeValue)}
-        />
+        {raffle.prizeValue ? (
+          <SummaryCard label="Valor estimado" value={formatCOP(raffle.prizeValue)} />
+        ) : null}
         <SummaryCard
           label="Valor del puesto"
           value={formatCOP(raffle.pricePerNumber)}

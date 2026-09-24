@@ -1,5 +1,5 @@
 {
-  "id": "e02a4d4e-c731-4179-95b1-5452df91079c",
+  "id": "032c8dfc-0056-4f0e-8874-2529c1931dc5",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -119,7 +119,7 @@
           "name": "prize_value",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "price_per_number": {
           "name": "price_per_number",
