@@ -18,6 +18,8 @@ CREATE TABLE "raffles" (
 	"prize_description" text NOT NULL,
 	"prize_value" integer NOT NULL,
 	"price_per_number" integer NOT NULL,
+	"lottery_name" text NOT NULL,
+	"prize_image_data_url" text,
 	"grid_size" integer DEFAULT 100 NOT NULL,
 	"status" "raffle_status" DEFAULT 'active' NOT NULL,
 	"draw_date" timestamp,

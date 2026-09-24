@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 import type { ActionState } from "./actions";
+import { ImageInput } from "./image-input";
 
 const initialState: ActionState = { error: null };
 
@@ -26,6 +27,8 @@ export function RaffleForm({
     prizeDescription: string;
     prizeValue: number;
     pricePerNumber: number;
+    lotteryName: string;
+    prizeImageDataUrl?: string | null;
     gridSize: number;
     drawDate?: string | null;
   };
@@ -55,6 +58,11 @@ export function RaffleForm({
           defaultValue={defaultValues?.prizeDescription}
         />
       </div>
+
+      <ImageInput
+        name="prizeImageDataUrl"
+        defaultValue={defaultValues?.prizeImageDataUrl}
+      />
 
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5">
@@ -100,6 +108,17 @@ export function RaffleForm({
           </p>
         </div>
       ) : null}
+
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="lotteryName">Lotería con la que se juega</Label>
+        <Input
+          id="lotteryName"
+          name="lotteryName"
+          required
+          placeholder="Lotería de Boyacá"
+          defaultValue={defaultValues?.lotteryName}
+        />
+      </div>
 
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="drawDate">Fecha del sorteo (opcional)</Label>

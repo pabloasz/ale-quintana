@@ -1,5 +1,5 @@
 {
-  "id": "901f3c01-898e-45d5-9141-aefe502405d8",
+  "id": "e02a4d4e-c731-4179-95b1-5452df91079c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -126,6 +126,18 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": true
+        },
+        "lottery_name": {
+          "name": "lottery_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prize_image_data_url": {
+          "name": "prize_image_data_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "grid_size": {
           "name": "grid_size",

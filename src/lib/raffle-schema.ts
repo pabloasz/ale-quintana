@@ -11,6 +11,13 @@ export const raffleFormSchema = z.object({
     .number()
     .int()
     .positive("El valor del puesto debe ser mayor a 0"),
+  lotteryName: z.string().trim().min(1, "Indicá con qué lotería se juega"),
+  prizeImageDataUrl: z
+    .string()
+    .max(3_000_000, "La foto es demasiado pesada")
+    .refine((v) => v.startsWith("data:image/"), "Foto inválida")
+    .optional()
+    .or(z.literal("")),
   gridSize: z.coerce
     .number()
     .int()

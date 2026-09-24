@@ -41,6 +41,8 @@ export default async function EditRafflePage({
           prizeDescription: raffle.prizeDescription,
           prizeValue: raffle.prizeValue,
           pricePerNumber: raffle.pricePerNumber,
+          lotteryName: raffle.lotteryName,
+          prizeImageDataUrl: raffle.prizeImageDataUrl,
           gridSize: raffle.gridSize,
           drawDate: raffle.drawDate
             ? raffle.drawDate.toISOString().slice(0, 10)

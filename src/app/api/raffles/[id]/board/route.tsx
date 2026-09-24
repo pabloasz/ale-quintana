@@ -60,7 +60,8 @@ export async function GET(
   const gridWidth = columns * CELL + (columns - 1) * GAP;
   const rows = Math.ceil(raffle.gridSize / columns);
   const gridHeight = rows * CELL + Math.max(0, rows - 1) * GAP;
-  const height = 520 + gridHeight;
+  const headerHeight = raffle.prizeImageDataUrl ? 780 : 560;
+  const height = headerHeight + gridHeight;
 
   return new ImageResponse(
     (
@@ -95,6 +96,23 @@ export async function GET(
           >
             Ale Quintana
           </span>
+          {raffle.prizeImageDataUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element -- Satori renderiza a partir de este árbol, no es una página web
+            <img
+              src={raffle.prizeImageDataUrl}
+              width={220}
+              height={220}
+              alt=""
+              style={{
+                marginTop: 16,
+                width: 220,
+                height: 220,
+                borderRadius: 24,
+                objectFit: "cover",
+                border: "4px solid rgba(255,255,255,0.8)",
+              }}
+            />
+          ) : null}
           <span
             style={{
               fontSize: 52,
@@ -158,6 +176,18 @@ export async function GET(
               </span>
             </div>
           </div>
+
+          <span
+            style={{
+              fontSize: 22,
+              fontWeight: 600,
+              color: "#6b4e05",
+              marginTop: 20,
+              textAlign: "center",
+            }}
+          >
+            Juega con: {raffle.lotteryName}
+          </span>
         </div>
 
         <div

@@ -46,16 +46,29 @@ export default async function RaffleDetailPage({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-start justify-between gap-3">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-lg font-semibold">{raffle.title}</h1>
-            <Badge variant={raffle.status === "active" ? "reserved" : "paid"}>
-              {raffle.status === "active" ? "Activa" : "Finalizada"}
-            </Badge>
+        <div className="flex gap-3">
+          {raffle.prizeImageDataUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element -- data URL guardada en la base, no un asset estático
+            <img
+              src={raffle.prizeImageDataUrl}
+              alt="Foto del premio"
+              className="size-16 shrink-0 rounded-lg border border-border object-cover"
+            />
+          ) : null}
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-lg font-semibold">{raffle.title}</h1>
+              <Badge variant={raffle.status === "active" ? "reserved" : "paid"}>
+                {raffle.status === "active" ? "Activa" : "Finalizada"}
+              </Badge>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              {raffle.prizeDescription}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Juega con: {raffle.lotteryName}
+            </p>
           </div>
-          <p className="text-sm text-muted-foreground">
-            {raffle.prizeDescription}
-          </p>
         </div>
         <Button asChild variant="outline" size="sm">
           <Link href={`/raffles/${raffle.id}/edit`}>Editar</Link>

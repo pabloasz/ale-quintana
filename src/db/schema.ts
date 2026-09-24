@@ -29,6 +29,8 @@ export const raffles = pgTable("raffles", {
   prizeDescription: text("prize_description").notNull(),
   prizeValue: integer("prize_value").notNull(),
   pricePerNumber: integer("price_per_number").notNull(),
+  lotteryName: text("lottery_name").notNull(),
+  prizeImageDataUrl: text("prize_image_data_url"),
   gridSize: integer("grid_size").notNull().default(100),
   status: raffleStatus("status").notNull().default("active"),
   drawDate: timestamp("draw_date"),

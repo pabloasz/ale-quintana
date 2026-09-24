@@ -28,7 +28,7 @@ export async function createRaffleAction(
     return { error: parsed.error.issues[0]?.message ?? "Datos inválidos" };
   }
 
-  const { gridSize, drawDate, ...rest } = parsed.data;
+  const { gridSize, drawDate, prizeImageDataUrl, ...rest } = parsed.data;
 
   const [raffle] = await db
     .insert(raffles)
@@ -36,6 +36,7 @@ export async function createRaffleAction(
       ...rest,
       gridSize,
       drawDate: drawDate ? new Date(drawDate) : undefined,
+      prizeImageDataUrl: prizeImageDataUrl || null,
     })
     .returning({ id: raffles.id });
 
@@ -64,13 +65,14 @@ export async function updateRaffleAction(
     return { error: parsed.error.issues[0]?.message ?? "Datos inválidos" };
   }
 
-  const { drawDate, ...rest } = parsed.data;
+  const { drawDate, prizeImageDataUrl, ...rest } = parsed.data;
 
   await db
     .update(raffles)
     .set({
       ...rest,
       drawDate: drawDate ? new Date(drawDate) : null,
+      prizeImageDataUrl: prizeImageDataUrl || null,
       updatedAt: new Date(),
     })
     .where(eq(raffles.id, raffleId));
